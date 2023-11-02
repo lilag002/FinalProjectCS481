@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "822902088583",
+    "project_id": "fishersmeet",
+    "storage_bucket": "fishersmeet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822902088583:android:70f5118fba0fef40d1e922",
+        "android_client_info": {
+          "package_name": "com.example.finalprojectcs481"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABLqW6kBFK3dW1XbTUiQ-BAJdWVK-IjeI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
