@@ -13,6 +13,26 @@
         android:theme="@style/Theme.FinalProjectCS481"
         tools:targetApi="31">
         <activity
+            android:name=".weather.Weather_Page"
+            android:exported="false" />
+        <activity
+            android:name=".search.Search_Page"
+            android:exported="false" />
+        <activity
+            android:name=".profile.User_Profile_Page"
+            android:exported="false" />
+        <activity
+            android:name=".post.Add_Post"
+            android:exported="false"
+            android:label="@string/title_activity_add_post"
+            android:theme="@style/Theme.FinalProjectCS481" />
+        <activity
+            android:name=".login.SignUp_Dark"
+            android:exported="false" />
+        <activity
+            android:name=".login.Login_Dark"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
