@@ -4,73 +4,109 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#01161E"
     tools:context=".SignupActivity"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="12dp">
 
+    <ImageView
+        android:id="@+id/signup_title"
+        android:layout_width="315dp"
+        android:layout_height="55dp"
+        android:background="@drawable/signup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="48dp"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/login_creds"
+        android:layout_width="210dp"
+        android:layout_height="34dp"
+        android:background="@drawable/loginCreds"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="334dp"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/submit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_round"
         android:text="Create Account"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="132dp"
-        tools:layout_editor_absoluteY="555dp" />
-
-    <EditText
-        android:id="@+id/editTextTextEmailAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="154dp"
-        tools:ignore="MissingConstraints" />
+        tools:layout_editor_absoluteY="617dp" />
 
     <EditText
         android:id="@+id/lastName"
         android:layout_width="173dp"
         android:layout_height="40dp"
+        android:background="@drawable/edit_round"
         android:ems="10"
-        android:hint="Last Name"
+        android:fontFamily="@font/arimobolditalic"
+        android:hint="\t\tLast Name"
         android:inputType="text"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="222dp"
-        tools:layout_editor_absoluteY="82dp"
-        tools:ignore="MissingConstraints" />
+        tools:layout_editor_absoluteY="156dp" />
+
+    <EditText
+        android:id="@+id/editTextTextEmailAddress"
+        android:layout_width="273dp"
+        android:layout_height="40dp"
+        android:background="@drawable/edit_round"
+        android:ems="10"
+        android:fontFamily="@font/arimobolditalic"
+        android:hint="\t\tEmail"
+        android:inputType="textEmailAddress"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="240dp" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="245dp"
+        android:layout_height="40dp"
+        android:background="@drawable/edit_round"
+        android:ems="10"
+        android:fontFamily="@font/arimobolditalic"
+        android:hint="\t\tUsername"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@+id/password"
+        app:layout_constraintStart_toStartOf="@+id/password"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="407dp" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="245dp"
+        android:layout_height="40dp"
+        android:background="@drawable/edit_round"
+        android:ems="10"
+        android:fontFamily="@font/arimobolditalic"
+        android:hint="\t\tPassword"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/submit_button"
+        app:layout_constraintStart_toStartOf="@+id/submit_button"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="493dp" />
 
     <EditText
         android:id="@+id/firstName"
         android:layout_width="173dp"
         android:layout_height="40dp"
+        android:background="@drawable/edit_round"
         android:ems="10"
-        android:hint="First Name"
+        android:fontFamily="@font/arimobolditalic"
+        android:hint="\t\tFirst Name"
         android:inputType="text"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="82dp"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/editTextTextPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        tools:layout_editor_absoluteX="105dp"
-        tools:layout_editor_absoluteY="399dp"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/editTextText3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Username"
-        android:inputType="text"
-        tools:layout_editor_absoluteX="102dp"
-        tools:layout_editor_absoluteY="291dp"
-        tools:ignore="MissingConstraints" />
+        tools:layout_editor_absoluteY="156dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
