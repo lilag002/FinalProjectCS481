@@ -26,9 +26,6 @@ class SignupActivity : AppCompatActivity() {
             finish() // Close the current LoginActivity
         }
 
-//        val emailPattern = Pattern.compile(
-//            "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}\\@[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})+"
-//        )
         val email = findViewById<EditText>(R.id.editTextTextEmailAddress).text
 
         fun isValidString(str: String): Boolean{
