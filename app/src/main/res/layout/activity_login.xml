@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#01161E"
+    android:background="@color/navyblue"
     tools:context=".LoginActivity">
 
     <ImageView
@@ -24,12 +24,11 @@
     <ImageView
         android:id="@+id/title"
         android:layout_width="283dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="65dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="30dp"
         android:src="@drawable/title4login"
         app:layout_constraintBottom_toTopOf="@+id/insert_username"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo"
         tools:ignore="MissingConstraints" />
@@ -55,7 +54,7 @@
         android:background="@drawable/edit_round"
         android:ems="10"
         android:fontFamily="@font/arimoitalic"
-        android:hint="\t\tPassword"
+        android:hint="  Password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/loginBtn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +71,7 @@
         android:background="@drawable/edit_round"
         android:ems="10"
         android:fontFamily="@font/arimoitalic"
-        android:hint="\t\tUsername"
+        android:hint="  Username"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/insert_password"
         app:layout_constraintEnd_toEndOf="parent"
