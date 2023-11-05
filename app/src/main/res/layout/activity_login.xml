@@ -9,65 +9,87 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="217dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="54dp"
+        android:layout_marginBottom="470dp"
         android:src="@drawable/white"
+        app:layout_constraintBottom_toTopOf="@+id/backButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="54dp"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/title"
         android:layout_width="283dp"
-        android:layout_height="86dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="65dp"
         android:src="@drawable/title4login"
+        app:layout_constraintBottom_toTopOf="@+id/insert_username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="275dp"
+        app:layout_constraintTop_toBottomOf="@+id/logo"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/loginBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="74dp"
         android:text="Login"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="609dp"
+        app:layout_constraintTop_toBottomOf="@+id/insert_password"
         tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/insert_password"
         android:layout_width="245dp"
         android:layout_height="45dp"
+        android:layout_marginBottom="57dp"
         android:background="@drawable/edit_round"
         android:ems="10"
-        android:hint="\t\tPassword"
         android:fontFamily="@font/arimoitalic"
+        android:hint="\t\tPassword"
         android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/loginBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="507dp"
+        app:layout_constraintTop_toBottomOf="@+id/insert_username"
         tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/insert_username"
         android:layout_width="245dp"
         android:layout_height="45dp"
+        android:layout_marginBottom="36dp"
         android:background="@drawable/edit_round"
         android:ems="10"
         android:fontFamily="@font/arimoitalic"
         android:hint="\t\tUsername"
         android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/insert_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="426dp"
+        app:layout_constraintTop_toBottomOf="@+id/title"
         tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="85dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
