@@ -59,12 +59,20 @@ class SignupActivity : AppCompatActivity() {
                     user["email"] = email
                     user["firstname"] = findViewById<EditText>(R.id.firstName).text.toString()
                     user["lastname"] = findViewById<EditText>(R.id.lastName).text.toString()
+                    user["username"] = findViewById<EditText>(R.id.username).text.toString()
                     // Do NOT store the password here
 
                     val db = FirebaseFirestore.getInstance()
                     db.collection("users").document(auth.currentUser!!.uid).set(user)
                         .addOnSuccessListener {
                             Log.d("dbFirebase", "User profile created for ID: ${auth.currentUser!!.uid}")
+
+                            val intent = Intent(this, WelcomeActivity::class.java)
+                            startActivity(intent)
+                            finish() // Close the current SignupActivity
+                            Toast.makeText(this@SignupActivity, "Account Creation Successful!", Toast.LENGTH_SHORT).show()
+
+
                         }
                         .addOnFailureListener {
                             Log.d("dbFirebase", "Error adding user profile", it)
