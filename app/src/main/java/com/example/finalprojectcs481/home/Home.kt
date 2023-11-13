@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.finalprojectcs481.R
+import com.example.finalprojectcs481.databinding.ActivityHomePageBinding
+import com.example.finalprojectcs481.databinding.ActivityMainBinding
 import com.example.finalprojectcs481.home.homefragments.Add_Post
 import com.example.finalprojectcs481.home.homefragments.Home_Page
 import com.example.finalprojectcs481.home.homefragments.Search_Page
@@ -12,10 +14,10 @@ import com.example.finalprojectcs481.home.homefragments.Weather_Page
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class Home : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_page)
-
 
         val homeFragment = Home_Page()
         val searchFragment = Search_Page()
@@ -25,8 +27,10 @@ class Home : AppCompatActivity() {
 
         changeFragment(homeFragment)
 
-        findViewById<BottomNavigationView>(R.id.bottom_nav).setOnItemSelectedListener { item ->
+
+        findViewById<BottomNavigationView>(R.id.bottomNav).setOnItemSelectedListener { item ->
             when (item.itemId) {
+
                 R.id.ic_home -> {
                     changeFragment(homeFragment)
                     true
@@ -54,7 +58,11 @@ class Home : AppCompatActivity() {
 
                 else -> false
             }
+
+
         }
+
+
     }
 
 

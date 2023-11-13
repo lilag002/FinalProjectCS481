@@ -6,9 +6,15 @@
     tools:context=".home.homefragments.Search_Page">
 
     <!-- TODO: Update blank fragment layout -->
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="search fragment" />
+        android:text="JOHN AND RAF'S SEARCH FRAGMENT" />
+
+    <SearchView
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
 
 </FrameLayout>

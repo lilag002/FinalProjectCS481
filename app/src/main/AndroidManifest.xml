@@ -19,7 +19,7 @@
             android:name=".search.Search_Page"
             android:exported="false" />
         <activity
-            android:name=".profile.User_Profile_Page"
+            android:name=".home.Home"
             android:exported="false" />
         <activity
             android:name=".post.Add_Post"
