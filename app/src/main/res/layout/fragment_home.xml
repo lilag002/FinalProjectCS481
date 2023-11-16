@@ -5,10 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".home.homefragments.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/homeRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="TEAMS home fragment" />
-
+        android:layout_height="match_parent" />
 </FrameLayout>
