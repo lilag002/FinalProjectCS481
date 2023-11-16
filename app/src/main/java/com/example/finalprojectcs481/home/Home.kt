@@ -4,8 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.finalprojectcs481.R
-import com.example.finalprojectcs481.databinding.ActivityHomePageBinding
-import com.example.finalprojectcs481.databinding.ActivityMainBinding
+//import com.example.finalprojectcs481.databinding.ActivityHomePageBinding
+//import com.example.finalprojectcs481.databinding.ActivityMainBinding
 import com.example.finalprojectcs481.home.homefragments.HomeFragment
 import com.example.finalprojectcs481.home.homefragments.PostFragment
 import com.example.finalprojectcs481.home.homefragments.ProfileFragment
