@@ -1,21 +1,15 @@
-package com.example.finalprojectcs481
+package com.example.finalprojectcs481.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.util.Log
-import android.util.Patterns
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.finalprojectcs481.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.example.finalprojectcs481.fragments.HomeFragment
-import java.util.regex.Pattern
 
 
 class SignupActivity : AppCompatActivity() {

@@ -8,7 +8,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:name="com.example.finalprojectcs481.fragments.HomeFragment"
+        android:name="com.example.finalprojectcs481.home.homefragments.HomeFragment"
         android:layout_width="383dp"
         android:layout_height="501dp"
         tools:layout_editor_absoluteX="12dp"

@@ -6,11 +6,11 @@ import androidx.fragment.app.Fragment
 import com.example.finalprojectcs481.R
 import com.example.finalprojectcs481.databinding.ActivityHomePageBinding
 import com.example.finalprojectcs481.databinding.ActivityMainBinding
-import com.example.finalprojectcs481.home.homefragments.Add_Post
-import com.example.finalprojectcs481.home.homefragments.Home_Page
-import com.example.finalprojectcs481.home.homefragments.Search_Page
-import com.example.finalprojectcs481.home.homefragments.User_Profile
-import com.example.finalprojectcs481.home.homefragments.Weather_Page
+import com.example.finalprojectcs481.home.homefragments.HomeFragment
+import com.example.finalprojectcs481.home.homefragments.PostFragment
+import com.example.finalprojectcs481.home.homefragments.ProfileFragment
+import com.example.finalprojectcs481.home.homefragments.SearchFragment
+import com.example.finalprojectcs481.home.homefragments.WeatherFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class Home : AppCompatActivity() {
@@ -19,11 +19,11 @@ class Home : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_page)
 
-        val homeFragment = Home_Page()
-        val searchFragment = Search_Page()
-        val addPostFragment = Add_Post()
-        val weatherFragment = Weather_Page()
-        val userProfileFragment = User_Profile()
+        val homeFragment = HomeFragment()
+        val searchFragment = SearchFragment()
+        val addPostFragment = PostFragment()
+        val weatherFragment = WeatherFragment()
+        val userProfileFragment = ProfileFragment()
 
         changeFragment(homeFragment)
 
@@ -64,7 +64,6 @@ class Home : AppCompatActivity() {
 
 
     }
-
 
     private fun changeFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().apply {

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#01161E"
-    tools:context=".SignupActivity"
+    tools:context=".login.SignupActivity"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="12dp">
 
