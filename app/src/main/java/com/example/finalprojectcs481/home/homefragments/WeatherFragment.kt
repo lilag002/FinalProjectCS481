@@ -23,6 +23,7 @@ class WeatherFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        // to do
         return inflater.inflate(R.layout.fragment_weather, container, false)
     }
 
