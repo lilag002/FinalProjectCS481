@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.finalprojectcs481.R
+import com.example.finalprojectcs481.home.Home
 import com.google.firebase.auth.FirebaseAuth
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +35,9 @@ class LoginActivity : AppCompatActivity() {
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             Toast.makeText(this@LoginActivity, "Login successful!", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this, Home::class.java)
+                            startActivity(intent)
+                            finish()
                             // Navigate to the next activity/fragment or do whatever you want upon successful login
                         } else {
                             Toast.makeText(this@LoginActivity, "Login failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()

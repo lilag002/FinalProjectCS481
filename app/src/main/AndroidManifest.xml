@@ -13,7 +13,7 @@
         android:theme="@style/Theme.FinalProjectCS481"
         tools:targetApi="31">
         <activity
-            android:name=".home.Home"
+            android:name=".login.WelcomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".login.LoginActivity" />
+        <activity android:name=".login.SignupActivity" />
+        <activity android:name=".home.Home" />
+
     </application>
 
 </manifest>
