@@ -20,7 +20,9 @@
         android:id="@+id/buttonAddCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:width="150dp"
+        android:height="50dp"
+        android:layout_marginLeft="130dp"
         android:text="Add City" />
 
     <androidx.recyclerview.widget.RecyclerView
