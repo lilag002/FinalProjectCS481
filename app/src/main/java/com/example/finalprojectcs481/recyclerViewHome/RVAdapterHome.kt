@@ -9,9 +9,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalprojectcs481.R
 import com.example.finalprojectcs481.postModelData.PostData
+import com.squareup.picasso.Picasso
 
 
-    class RVAdapterHome(private val postList: List<PostData>): RecyclerView.Adapter<RVAdapterHome.ViewHolder>() {
+class RVAdapterHome(private val postList: List<PostData>): RecyclerView.Adapter<RVAdapterHome.ViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.recycler_view_home_row,parent,false)
@@ -25,8 +26,8 @@ import com.example.finalprojectcs481.postModelData.PostData
 //            holder.tvTITLE.text = "Title: "+item.title.toString()
 //            holder.tvCOMPLETED.text = "Completed: "+item.completed.toString()
             holder.tvTITLE.text = item.title.toString()
-            holder.tvUSERNAME.text = item.userName.toString()
-            holder.ivPOST.id = item.image
+            holder.tvUSERNAME.text = item.username.toString()
+            Picasso.get().load(item.image).into(holder.ivPOST)
 
         }
 

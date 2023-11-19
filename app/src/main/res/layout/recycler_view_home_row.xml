@@ -3,12 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/postCardView"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
+        android:elevation="20dp"
         app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,24 +19,24 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="448dp"
+            android:layout_height="567dp"
             android:background="#d9d9d9">
 
             <TextView
                 android:id="@+id/textViewPostTitle"
-                android:layout_width="213dp"
-                android:layout_height="39dp"
+                android:layout_width="380dp"
+                android:layout_height="38dp"
                 android:text="Test Title"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.081"
+                app:layout_constraintHorizontal_bias="0.482"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/imageViewPost"
-                android:layout_width="376dp"
-                android:layout_height="332dp"
+                android:layout_width="373dp"
+                android:layout_height="452dp"
                 android:layout_marginTop="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.515"
