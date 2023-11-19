@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
  */
 class HomeFragment : Fragment() {
 
-    private var posts: ArrayList<PostData> = ArrayList()
+    private var posts: ArrayList<Post> = ArrayList()
     //private val recyclerView: RecyclerView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,23 +34,18 @@ class HomeFragment : Fragment() {
         val recyclerView: RecyclerView = view.findViewById(R.id.homeRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
 
-        val db = FirebaseFirestore.getInstance()
-        db.collection("Posts").orderBy("date", Query.Direction.ASCENDING)
-            .get()
-            .addOnCompleteListener{
-                val result: StringBuffer = StringBuffer()
-                if(it.isSuccessful){
-                    posts.clear()
-                    for(document in it.result!!){
-                        posts.add(PostData(document.data.getValue("title").toString(),
-                            document.data.getValue("username").toString(),document.data.getValue("image").toString()))
-                        Log.d("document",document.data.getValue("image").toString())
-                    }
-                    recyclerView.adapter = RVAdapterHome(posts)
-                }
-            }
+        lifecycleScope.launch {
+            try {
+                val postDao = FirestorePostDao(FirebaseFirestore.getInstance())
+                val myPostList = postDao.getAllPosts()
 
-        //recyclerView.adapter = RVAdapterHome(posts)
+                posts.clear()
+                posts.addAll(myPostList)
+                recyclerView.adapter = RVAdapterHome(posts)
+            } catch (e: Exception) {
+                Log.e("ERROR", e.toString())
+            }
+        }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,34 +58,5 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
-
-//    private fun getPosts() {
-//        val db = FirebaseFirestore.getInstance()
-//        db.collection("Posts").orderBy("date", Query.Direction.ASCENDING)
-//            .get()
-//            .addOnCompleteListener{
-//                val result: StringBuffer = StringBuffer()
-//                if(it.isSuccessful){
-//                    posts.clear()
-//                    for(document in it.result!!){
-//                        posts.add(PostData(document.data.getValue("title").toString(),
-//                            document.data.getValue("username").toString(),document.data.getValue("image").toString()))
-//                        Log.d("document",document.data.getValue("image").toString())
-//                    }
-//                }
-//            }
-//
-//
-//    }
-
-//    private fun getPosts(){
-//        for ( i in 1..10){
-//            posts.add(PostData("Test Title","Test_User",R.drawable.goku))
-//        }
-//        val db = FirebaseFirestore.getInstance()
-//        val postDao = FirestorePostDao(db)
-//
-//        val myPostList : List<Post> = postDao.getAllPosts()
-//    }
 
 }

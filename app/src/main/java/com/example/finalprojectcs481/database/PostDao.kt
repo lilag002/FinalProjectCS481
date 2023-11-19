@@ -1,8 +1,13 @@
 package com.example.finalprojectcs481.database
 
+import android.util.Log
+import com.example.finalprojectcs481.postModelData.PostData
+import com.example.finalprojectcs481.recyclerViewHome.RVAdapterHome
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentReference
 import kotlinx.coroutines.tasks.await
 
 interface PostDao {
@@ -21,7 +26,7 @@ class FirestorePostDao(private val db: FirebaseFirestore) : PostDao {
     }
 
     override suspend fun getAllPosts(): List<Post> {
-        return postsCollection.get().await().toObjects(Post::class.java)
+        return postsCollection.orderBy("date",Query.Direction.ASCENDING).get().await().toObjects(Post::class.java)
     }
 
     override suspend fun addPost(post: Post) {
@@ -38,11 +43,15 @@ class FirestorePostDao(private val db: FirebaseFirestore) : PostDao {
 }
 
 data class Post(
-    val author: String,
-    val date: String,
-    val dislikes: Int,
-    val forum: String,
-    val image: String,
-    val likes: Int,
-    val title: String
-)
+    val author: DocumentReference? = null,
+    val username: String = "",
+    val date: Timestamp? = null,
+    val title: String = "",
+    val image: String = "",
+    val forum: DocumentReference? = null,
+    val likes: Int = 0,
+    val dislikes: Int = 0
+) {
+    // No-argument constructor
+    constructor() : this(null, "", null, "", "", null, 0, 0)
+}
