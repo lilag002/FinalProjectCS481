@@ -16,5 +16,5 @@ data class WeatherResult(
     @SerializedName("id") var id: Int? = null,
     @SerializedName("name") var name: Int? = null,
     @SerializedName("cod") var cod: Int? = null,
-    @SerializedName("snow") var snow: Snow? = Snow(placeholder),
+    @SerializedName("snow") var snow: Snow? = Snow(0.0),
     )
