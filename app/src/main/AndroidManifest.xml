@@ -28,6 +28,7 @@
         </activity>
         <activity android:name=".login.LoginActivity" />
         <activity android:name=".login.SignupActivity" />
+<!--        <activity android:name=".login.WelcomeActivity"/>-->
         <activity android:name=".home.Home" />
 
     </application>
