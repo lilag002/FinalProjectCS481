@@ -22,6 +22,13 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
             finish() // Close the current LoginActivity
         }
+//
+//        val emailEditText = findViewById<EditText>(R.id.insert_email)
+//        val passwordEditText = findViewById<EditText>(R.id.insert_password)
+//
+//        // Set initial text with leading spaces
+//        emailEditText.setText("\t" + getString(R.string.email_hint))
+//        passwordEditText.setText("\t")
 
         loginButton.setOnClickListener {
             val email = findViewById<EditText>(R.id.insert_email).text

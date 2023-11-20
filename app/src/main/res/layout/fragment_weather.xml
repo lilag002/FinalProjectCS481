@@ -3,12 +3,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home.homefragments.WeatherFragment">
+    tools:context=".home.homefragments.WeatherFragment"
+    android:id="@+id/weatherFragmentLayout">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- Add to fragment_weather.xml -->
+
+    <EditText
+        android:id="@+id/editTextCity"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="weather fragment" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:hint="Enter City Name" />
+
+    <Button
+        android:id="@+id/buttonAddCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="150dp"
+        android:height="50dp"
+        android:layout_marginLeft="130dp"
+        android:text="Add City" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCities"
+        android:layout_marginTop="150dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </FrameLayout>

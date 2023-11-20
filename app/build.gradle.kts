@@ -52,7 +52,23 @@ dependencies {
     implementation("com.google.firebase:firebase-auth-ktx:22.2.0")
     implementation("com.google.firebase:firebase-firestore-ktx:24.9.1")
 
+    //Location (if we get to it)
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+
+    //Convert API
+    implementation("com.google.code.gson:gson:2.10.1")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    //Connect with api network (load network image)
+    implementation("io.coil-kt:coil-compose:2.4.0")
+
+    //Layout (jetpack api library extension)
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.33.1-alpha")
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
 }
