@@ -1,25 +1,26 @@
 package com.example.finalprojectcs481.home.homefragments
 
+//import RecyclerViewforProfilePage.adapter
+
+
 import RecyclerViewforProfilePage.ForumDataAPIItem
 import RecyclerViewforProfilePage.ProfileRVAdapter
-//import RecyclerViewforProfilePage.adapter
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalprojectcs481.R
-
-
-
+import com.example.finalprojectcs481.login.WelcomeActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QueryDocumentSnapshot
-import com.google.firebase.firestore.QuerySnapshot
+
 
 /**
  * A simple [Fragment] subclass.
@@ -48,6 +49,13 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d("tag", "RIGHT HERE ASSHOLE");
+        // Setting username
+        db.collection("users").document(FirebaseAuth.getInstance().uid.toString()).get()
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    view.findViewById<TextView>(R.id.usernameTextView).text = it.result.data?.getValue("username").toString()
+                }
+            }
         // Initialize RecyclerView
         recyclerView = view.findViewById(R.id.ProfileForumRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -57,6 +65,12 @@ class ProfileFragment : Fragment() {
         recyclerView.adapter = adapter
 
         fetchDataFromFirestore()
+
+        view.findViewById<TextView>(R.id.logOutTextView).setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            val intent = Intent(activity, WelcomeActivity::class.java)
+            startActivity(intent)
+        }
 
         /*
         val dataList = listOf(
