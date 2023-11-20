@@ -1,14 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#124559"
     tools:context=".home.homefragments.ProfileFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
     <TextView
+        android:id="@+id/ProfilePageTitle"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|start"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="USER PROFILE"
+        android:textColor="@color/black"
+        android:textSize="18dp" />
+
+    <!-- Adjust the margin as needed -->
+
+
+    <TextView
+        android:id="@+id/usernameTextView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="profile fragment" />
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="110dp"
+        android:fontFamily="@font/arimobold"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="25dp" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profilePicture"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="150dp"
+        android:src="@drawable/sittingwolfcontemplating" />
+
+    <TextView
+        android:id="@+id/userBiography"
+        android:layout_width="380dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="260dp"
+        android:gravity="center"
+        android:text="BIOGRAPHY stuff goes in here!"
+        android:textColor="@color/black"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/userFollow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="320dp"
+        android:fontFamily="@font/arimobold"
+        android:text="Followed Forums"
+        android:textColor="@color/white"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/logOutTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="50dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="LOG OUT"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ProfileForumRecyclerView"
+        android:layout_width="300dp"
+        android:layout_height="322dp"
+        android:layout_gravity="bottom|center_horizontal" />
+
 
 </FrameLayout>
