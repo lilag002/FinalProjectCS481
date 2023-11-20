@@ -26,7 +26,7 @@ class FirestorePostDao(private val db: FirebaseFirestore) : PostDao {
     }
 
     override suspend fun getAllPosts(): List<Post> {
-        return postsCollection.orderBy("date",Query.Direction.ASCENDING).get().await().toObjects(Post::class.java)
+        return postsCollection.orderBy("date",Query.Direction.DESCENDING).get().await().toObjects(Post::class.java)
     }
 
     override suspend fun addPost(post: Post) {
