@@ -51,6 +51,8 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
     implementation ("com.squareup.picasso:picasso:2.8")
 
+    implementation ("com.squareup.picasso:picasso:2.8")
+
     implementation("com.google.android.material:material:1.1.1")
     implementation("com.google.firebase:firebase-auth-ktx:22.2.0")
     implementation("com.google.firebase:firebase-firestore-ktx:24.9.1")

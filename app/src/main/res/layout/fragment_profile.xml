@@ -3,12 +3,84 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/green"
     tools:context=".home.homefragments.ProfileFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="profile fragment" />
+        android:id="@+id/ProfilePageTitle"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|start"
+        android:ems="10"
+        android:inputType="text"
+        android:text="USER PROFILE"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="50dp"/>
+
+    <!-- Adjust the margin as needed -->
+
+
+    <TextView
+        android:id="@+id/usernameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="110dp"
+        android:fontFamily="@font/arimobold"
+        android:text="Your Username"
+        android:textColor="@color/white"
+        android:textSize="25dp" />
+
+    <ImageView
+        android:id="@+id/profilePicture"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginStart="160dp"
+        android:src="@drawable/ic_profile" />
+
+    <TextView
+        android:id="@+id/userBiography"
+        android:layout_width="380dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="260dp"
+        android:text="BIOGRAPHY stuff goes in here!"
+        android:layout_marginStart="20dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/userFollow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="320dp"
+        android:text="Followed"
+        android:layout_marginStart="165dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/arimobold"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/logOutTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LOG OUT"
+        android:layout_gravity="top|end"
+        android:clickable="true"
+        android:focusable="true"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="50dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ProfileForumRecyclerView"
+        android:layout_width="300dp"
+        android:layout_height="268dp"
+        android:layout_gravity="bottom|center_horizontal" />
+
 
 </FrameLayout>
