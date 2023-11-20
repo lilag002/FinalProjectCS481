@@ -1,8 +1,6 @@
 package com.example.finalprojectcs481.home.homefragments
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,20 +11,11 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalprojectcs481.R
-import com.example.finalprojectcs481.home.homefragments.weather.CityAdapter
+import com.example.finalprojectcs481.home.weather.CityAdapter
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.Priority
-import com.example.finalprojectcs481.home.homefragments.weather.MyLatLng
-import com.example.finalprojectcs481.home.homefragments.weather.WeatherViewModel
+import com.example.finalprojectcs481.home.weather.viewmodel.WeatherViewModel
 import java.util.Calendar
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 
 /**

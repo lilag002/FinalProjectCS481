@@ -1,4 +1,4 @@
-package com.example.finalprojectcs481.home.homefragments.weather
+package com.example.finalprojectcs481.home.weather
 
 data class MyLatLng(
     val lat : Double,

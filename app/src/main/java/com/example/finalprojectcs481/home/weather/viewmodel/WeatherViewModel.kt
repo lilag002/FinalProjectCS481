@@ -1,4 +1,4 @@
-package com.example.finalprojectcs481.home.homefragments.weather
+package com.example.finalprojectcs481.home.weather.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
