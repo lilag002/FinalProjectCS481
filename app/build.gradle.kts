@@ -48,6 +48,8 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
 
+    implementation ("com.squareup.picasso:picasso:2.8")
+
     implementation("com.google.android.material:material:1.1.1")
     implementation("com.google.firebase:firebase-auth-ktx:22.2.0")
     implementation("com.google.firebase:firebase-firestore-ktx:24.9.1")
