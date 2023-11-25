@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.finalprojectcs481.R
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +23,8 @@ import java.util.Calendar
 
 class WeatherFragment : Fragment() {
 
+    private lateinit var cityName: EditText
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,9 +35,11 @@ class WeatherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+        var cityNameFilled = false
+        cityName = view.findViewById<EditText>(R.id.cityTextView)
 
         // Determine whether it's day or night
-        val isDayTime = currentHour in 6..18
+        val isDayTime = currentHour in 6..16
 
         // Set the background based on the time of day
         view.setBackgroundResource(
@@ -42,20 +49,38 @@ class WeatherFragment : Fragment() {
                 R.drawable.weather_night
             }
         )
-        // Initialize and execute the task to fetch weather data
-        GlobalScope.launch(Dispatchers.Main) {
-            val result = fetchWeatherData()
-            result?.let { json ->
-                // Update your UI with the weather data
-                updateUI(json)
+        // Initialize and execute the task to fetch weather data (coroutine)
+        view.findViewById<Button>(R.id.submitBtn).setOnClickListener {
+            val enteredCity = cityName.text.toString().trim()
+            if (enteredCity.isNotEmpty()) {
+                // Call fetchweather funct when the button is clicked and cityName is not empty
+                // *runs second coroutine due to coroutine funct needing to be inside coroutine body*
+                GlobalScope.launch(Dispatchers.Main) {
+                    try {
+                        val result = fetchWeatherData(enteredCity)
+                        result?.let { json ->
+                            // Update your UI with the weather data
+                            updateUI(json)
+                        }
+                    } catch (e: Exception) {
+                        // Handle exceptions (e.g., network errors)
+                        e.printStackTrace()
+                        Toast.makeText(context, "Error fetching weather data", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            } else {
+                Toast.makeText(context, "Empty city name", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private suspend fun fetchWeatherData(): JSONObject? = withContext(Dispatchers.IO) {
+    private suspend fun fetchWeatherData(cityName: String): JSONObject? = withContext(Dispatchers.IO) {
         val apiKey = "d6cffea22b14de48943ce7db32244780"
-        val city = "San Marcos, California" // Replace with the desired city name
-        val apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=$city&units=imperial&appid=$apiKey"
+        val apiUrl =
+                "https://api.openweathermap.org/data/2.5/weather?q=" +
+                "$cityName" +
+                "&units=imperial" +
+                "&appid=$apiKey"
 
         try {
             val url = URL(apiUrl)
