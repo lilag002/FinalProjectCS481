@@ -20,43 +20,81 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="314dp"
+        android:layout_marginEnd="143dp"
         android:textColor="@android:color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintEnd_toStartOf="@+id/loadingIndicator"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.52" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/cityTextView"
-        android:layout_width="134dp"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="16dp"
         android:hint="Enter City"
         android:textColor="@android:color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintBottom_toTopOf="@+id/submitBtn"
+        app:layout_constraintEnd_toStartOf="@+id/unitSpinner"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.271" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/submitBtn"
         android:layout_width="134dp"
-        android:layout_height="51dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="145dp"
         android:text="Submit"
         android:textColor="@android:color/white"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/loadingIndicator"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cityTextView" />
+
+    <Spinner
+        android:id="@+id/unitSpinner"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="226dp"
+        android:entries="@array/unit_options"
+        app:layout_constraintBottom_toTopOf="@+id/loadingIndicator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cityTextView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Add this to your XML layout file (fragment_weather.xml) -->
+    <ProgressBar
+        android:id="@+id/loadingIndicator"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_marginEnd="147dp"
+        android:layout_marginBottom="310dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.393" />
+        app:layout_constraintStart_toEndOf="@+id/temperatureTextView"
+        app:layout_constraintTop_toBottomOf="@+id/unitSpinner" />
 
+    <TextView
+        android:id="@+id/weatherConditionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="232dp"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.703" />
 
     <!-- Add other TextViews for additional weather information -->
 
