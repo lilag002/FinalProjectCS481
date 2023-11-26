@@ -20,81 +20,90 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="314dp"
-        android:layout_marginEnd="143dp"
         android:textColor="@android:color/white"
         android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/loadingIndicator"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Add this to your XML layout file (fragment_weather.xml) -->
     <EditText
         android:id="@+id/cityTextView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="38dp"
-        android:layout_marginEnd="31dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="165dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="19dp"
         android:hint="Enter City"
         android:textColor="@android:color/white"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/submitBtn"
-        app:layout_constraintEnd_toStartOf="@+id/unitSpinner"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/submitBtn"
+        app:layout_constraintStart_toStartOf="@+id/submitBtn"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/submitBtn"
-        android:layout_width="134dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="145dp"
-        android:text="Submit"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/loadingIndicator"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cityTextView" />
+    <!--    <ProgressBar-->
+    <!--        android:id="@+id/loadingIndicator"-->
+    <!--        android:layout_width="80dp"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:layout_marginBottom="245dp"-->
+    <!--        android:visibility="invisible"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/temperatureTextView" />-->
 
     <Spinner
         android:id="@+id/unitSpinner"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="38dp"
-        android:layout_marginEnd="21dp"
-        android:layout_marginBottom="226dp"
+        android:layout_width="165dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="49dp"
         android:entries="@array/unit_options"
-        app:layout_constraintBottom_toTopOf="@+id/loadingIndicator"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/cityTextView"
         app:layout_constraintStart_toEndOf="@+id/cityTextView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/cityTextView" />
 
-    <!-- Add this to your XML layout file (fragment_weather.xml) -->
-    <ProgressBar
-        android:id="@+id/loadingIndicator"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_marginEnd="147dp"
-        android:layout_marginBottom="310dp"
-        android:visibility="invisible"
+    <Button
+        android:id="@+id/submitBtn"
+        android:layout_width="165dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="582dp"
+        android:text="Submit"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/temperatureTextView"
-        app:layout_constraintTop_toBottomOf="@+id/unitSpinner" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cityTextView" />
 
     <TextView
         android:id="@+id/weatherConditionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="232dp"
+        android:layout_marginStart="24dp"
         android:textColor="@android:color/white"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.703" />
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/temperatureTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.467"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cityText"
+        app:layout_constraintVertical_bias="0.442" />
+
+    <TextView
+        android:id="@+id/cityText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="212dp"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        app:flow_verticalAlign="center"
+        app:layout_constraintEnd_toEndOf="@+id/weatherConditionTextView"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <!-- Add other TextViews for additional weather information -->
 

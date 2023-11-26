@@ -22,6 +22,8 @@ import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.Calendar
+//import com.bumptech.glide.Glide
+
 
 class WeatherFragment : Fragment() {
 
@@ -37,10 +39,10 @@ class WeatherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
-        var cityNameFilled = false
-        cityName = view.findViewById<EditText>(R.id.cityTextView)
+//        var cityNameFilled = false
+        cityName = view.findViewById(R.id.cityTextView)
 
-        val loadingIndicator = view.findViewById<ProgressBar>(R.id.loadingIndicator)
+//        val loadingIndicator = view.findViewById<ProgressBar>(R.id.loadingIndicator)
 
         // Determine whether it's day or night
         val isDayTime = currentHour in 6..16
@@ -53,9 +55,14 @@ class WeatherFragment : Fragment() {
                 R.drawable.weather_night
             }
         )
+
+        // Initially hide the cityTextView
+        val cityTextView = view.findViewById<TextView>(R.id.cityText)
+        cityTextView.visibility = View.GONE
+
         // Initialize and execute the task to fetch weather data (coroutine)
         view.findViewById<Button>(R.id.submitBtn).setOnClickListener {
-            loadingIndicator.visibility = View.VISIBLE
+//            loadingIndicator.visibility = View.VISIBLE
 
             val enteredCity = cityName.text.toString().trim()
             val unitSpinner = view.findViewById<Spinner>(R.id.unitSpinner)
@@ -126,10 +133,13 @@ class WeatherFragment : Fragment() {
             val weatherArray = json.getJSONArray("weather")
             val weatherObject = weatherArray.getJSONObject(0) // Assuming the first item contains the main weather condition
             val weatherCondition = weatherObject.getString("main")
+//            val weatherIcon = weatherObject.getString("icon")
 
             // Example: Update a TextView with the temperature and city name
             val temperatureTextView = view?.findViewById<TextView>(R.id.temperatureTextView)
             val weatherConditionTextView = view?.findViewById<TextView>(R.id.weatherConditionTextView)
+            val cityTextView = view?.findViewById<TextView>(R.id.cityText)
+//            val weatherIconImageView = view?.findViewById<ImageView>(R.id.weatherIconImageView)
 
             // Convert temperature based on the selected unit
             val convertedTemperature = if (selectedUnit == "Celsius") {
@@ -140,14 +150,29 @@ class WeatherFragment : Fragment() {
                 String.format("%.2f", temperatureValue).toDouble()
             }
 
-            // Convert Double to String
-            val temperatureString = "Today's temperature in $cityName is $convertedTemperature°$selectedUnit"
+            val unitSymbol = if (selectedUnit == "Celsius") "C" else "F"
+            val temperatureString = "Today's temperature is $convertedTemperature°$unitSymbol"
 
             // Set the value in the TextView
             temperatureTextView?.text = temperatureString
-
             // Display the weather condition
             weatherConditionTextView?.text = "Weather: $weatherCondition"
+
+            if (cityName.isNotEmpty()) {
+                // Set the city name in the TextView
+                cityTextView?.text = cityName
+                // Make the TextView visible
+                cityTextView?.visibility = View.VISIBLE
+            } else {
+                // Hide the TextView if the cityName is empty
+                cityTextView?.visibility = View.GONE
+            }
+            // implementation 'com.github.bumptech.glide:glide:4.12.0'
+            // annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+            // Then, use Glide to load the weather icon
+//            Glide.with(requireContext())
+//                .load("https://openweathermap.org/img/wn/$weatherIcon.png")
+//                .into(weatherIconImageView!!)
 
             // Continue extracting and updating other relevant information
             // ...
@@ -156,6 +181,7 @@ class WeatherFragment : Fragment() {
             e.printStackTrace()
         }
     }
+
 
 
 }
