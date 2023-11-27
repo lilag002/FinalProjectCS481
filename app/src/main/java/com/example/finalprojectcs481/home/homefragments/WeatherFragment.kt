@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.TextView
@@ -22,7 +24,9 @@ import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.Calendar
-//import com.bumptech.glide.Glide
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DecodeFormat
+import com.bumptech.glide.request.RequestOptions
 
 
 class WeatherFragment : Fragment() {
@@ -81,12 +85,26 @@ class WeatherFragment : Fragment() {
                     } catch (e: Exception) {
                         // Handle exceptions (e.g., network errors)
                         e.printStackTrace()
-                        Toast.makeText(context, "Error fetching weather data", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Error fetching weather data", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 }
             } else {
-                Toast.makeText(context, "Empty city name. Please enter again", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Empty city name. Please enter again", Toast.LENGTH_SHORT)
+                    .show()
             }
+        }
+        val isRainyDay = true // Will replace with logic to determine if rainy, sunny, etc.
+
+        // Load rain GIF with Glide if it's a rainy day
+        if (isRainyDay) {
+            val imageView: ImageView = view.findViewById(R.id.imageView)
+            Glide.with(this)
+                .asGif()
+                .load(R.drawable.rain)
+                .apply(RequestOptions().format(DecodeFormat.PREFER_ARGB_8888))
+                .into(imageView)
+
         }
     }
 
