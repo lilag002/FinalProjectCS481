@@ -40,6 +40,27 @@ class WeatherFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_weather2, container, false)
     }
 
+    private fun mapWeatherConditionToGif(weatherCondition: String): Int {
+        return when (weatherCondition.toLowerCase()) {
+            "clouds" -> R.drawable.cloudy
+            "rain" -> R.drawable.rain
+            "snow" -> R.drawable.snow
+//            "mist" -> R.drawable.mike
+//            "smoke" -> R.drawable.mike
+//            "haze" -> R.drawable.mike
+//            "dust" -> R.drawable.mike
+//            "fog" -> R.drawable.mike
+//            "sand" -> R.drawable.mike
+//            "ash" -> R.drawable.mike
+//            "squail" -> R.drawable.mike
+//            "tornado" -> R.drawable.mike
+            "thunderstorm" -> R.drawable.thunder
+
+            // Add more mappings for other weather conditions as needed
+//            else -> R.drawable.mike // Default GIF or a placeholder
+            else -> R.drawable.empty
+        }
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
@@ -94,18 +115,19 @@ class WeatherFragment : Fragment() {
                     .show()
             }
         }
-        val isRainyDay = true // Will replace with logic to determine if rainy, sunny, etc.
+//        val isRainyDay = true // Will replace with logic to determine if rainy, sunny, etc.
 
+        //have snow, rain, thunder, and cloudy
         // Load rain GIF with Glide if it's a rainy day
-        if (isRainyDay) {
-            val imageView: ImageView = view.findViewById(R.id.imageView)
-            Glide.with(this)
-                .asGif()
-                .load(R.drawable.rain)
-                .apply(RequestOptions().format(DecodeFormat.PREFER_ARGB_8888))
-                .into(imageView)
-
-        }
+//        if (isRainyDay) {
+//            val imageView: ImageView = view.findViewById(R.id.imageView)
+//            Glide.with(this)
+//                .asGif()
+//                .load(R.drawable.cloudy)
+//                .apply(RequestOptions().format(DecodeFormat.PREFER_ARGB_8888))
+//                .into(imageView)
+//
+//        }
     }
 
     private suspend fun fetchWeatherData(cityName: String): JSONObject? = withContext(Dispatchers.IO) {
@@ -151,12 +173,14 @@ class WeatherFragment : Fragment() {
             val weatherArray = json.getJSONArray("weather")
             val weatherObject = weatherArray.getJSONObject(0) // Assuming the first item contains the main weather condition
             val weatherCondition = weatherObject.getString("main")
+            val weatherDescription = weatherObject.getString("description")
 //            val weatherIcon = weatherObject.getString("icon")
 
             // Example: Update a TextView with the temperature and city name
             val temperatureTextView = view?.findViewById<TextView>(R.id.temperatureTextView)
             val weatherConditionTextView = view?.findViewById<TextView>(R.id.weatherConditionTextView)
             val cityTextView = view?.findViewById<TextView>(R.id.cityText)
+            val weatherDesc = view?.findViewById<TextView>(R.id.DescriptionTextView)
 //            val weatherIconImageView = view?.findViewById<ImageView>(R.id.weatherIconImageView)
 
             // Convert temperature based on the selected unit
@@ -176,6 +200,8 @@ class WeatherFragment : Fragment() {
             // Display the weather condition
             weatherConditionTextView?.text = "Weather: $weatherCondition"
 
+            weatherDesc?.text = weatherDescription
+
             if (cityName.isNotEmpty()) {
                 // Set the city name in the TextView
                 cityTextView?.text = cityName
@@ -185,6 +211,16 @@ class WeatherFragment : Fragment() {
                 // Hide the TextView if the cityName is empty
                 cityTextView?.visibility = View.GONE
             }
+
+            // Load the appropriate GIF based on the weather condition
+            val gifResourceId = mapWeatherConditionToGif(weatherCondition)
+            val imageView: ImageView = requireView().findViewById(R.id.imageView)
+
+            Glide.with(this)
+                .asGif()
+                .load(gifResourceId)
+                .apply(RequestOptions().format(DecodeFormat.PREFER_ARGB_8888))
+                .into(imageView)
             // implementation 'com.github.bumptech.glide:glide:4.12.0'
             // annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
             // Then, use Glide to load the weather icon
