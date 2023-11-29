@@ -46,15 +46,15 @@ class WeatherFragment : Fragment() {
             "clouds" -> R.drawable.cloudy
             "rain" -> R.drawable.rain
             "snow" -> R.drawable.snow
-//            "mist" -> R.drawable.mike  :((( gif for easter egg lol
-//            "smoke" -> R.drawable.mike
-//            "haze" -> R.drawable.mike
-//            "dust" -> R.drawable.mike
-//            "fog" -> R.drawable.mike
-//            "sand" -> R.drawable.mike
-//            "ash" -> R.drawable.mike
-//            "squail" -> R.drawable.mike
-//            "tornado" -> R.drawable.mike
+            "mist" -> R.drawable.mike
+            "smoke" -> R.drawable.mike
+            "haze" -> R.drawable.mike
+            "dust" -> R.drawable.mike
+            "fog" -> R.drawable.mike
+            "sand" -> R.drawable.mike
+            "ash" -> R.drawable.mike
+            "squail" -> R.drawable.mike
+            "tornado" -> R.drawable.mike
             "thunderstorm" -> R.drawable.thunder
 
             // Add more mappings for other weather conditions as needed
