@@ -9,11 +9,16 @@
     android:layout_height="match_parent"
     tools:ignore="ExtraText">
 
-    <!--    <ImageView-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:scaleType="centerCrop" />-->
-
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView2"-->
+<!--        android:layout_width="50dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_marginBottom="115dp"-->
+<!--        android:scaleType="centerCrop"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/DescriptionTextView"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/DescriptionTextView"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/unitSpinner" />-->
 
     <TextView
         android:id="@+id/temperatureTextView"
@@ -32,6 +37,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitCenter"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,10 +75,11 @@
         android:layout_width="165dp"
         android:layout_height="50dp"
         android:layout_marginStart="49dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="494dp"
         android:entries="@array/unit_options"
-        app:layout_constraintBottom_toBottomOf="@+id/cityTextView"
         app:layout_constraintStart_toEndOf="@+id/cityTextView"
-        app:layout_constraintTop_toTopOf="@+id/cityTextView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/submitBtn"
@@ -120,6 +127,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
         android:text=""
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="@+id/temperatureTextView"
         app:layout_constraintStart_toStartOf="@+id/temperatureTextView"
         app:layout_constraintTop_toBottomOf="@+id/temperatureTextView" />

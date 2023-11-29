@@ -1,6 +1,7 @@
 package com.example.finalprojectcs481.home.homefragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,7 +46,7 @@ class WeatherFragment : Fragment() {
             "clouds" -> R.drawable.cloudy
             "rain" -> R.drawable.rain
             "snow" -> R.drawable.snow
-//            "mist" -> R.drawable.mike
+//            "mist" -> R.drawable.mike  :((( gif for easter egg lol
 //            "smoke" -> R.drawable.mike
 //            "haze" -> R.drawable.mike
 //            "dust" -> R.drawable.mike
@@ -106,8 +107,17 @@ class WeatherFragment : Fragment() {
                     } catch (e: Exception) {
                         // Handle exceptions (e.g., network errors)
                         e.printStackTrace()
-                        Toast.makeText(context, "Error fetching weather data", Toast.LENGTH_SHORT)
-                            .show()
+
+                        val errorMessage = e.message ?: "Error fetching weather data"
+
+                        if (errorMessage.contains("City not found")) {
+                            // City not found, display a specific toast message
+                            Toast.makeText(context, "City not found. Please enter a valid city name", Toast.LENGTH_SHORT).show()
+                        } else {
+                            // Other errors, display a generic toast message
+                            Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
+                        }
+//                        Log.e("WeatherFragment", "Error: $errorMessage")
                     }
                 }
             } else {
@@ -181,7 +191,7 @@ class WeatherFragment : Fragment() {
             val weatherConditionTextView = view?.findViewById<TextView>(R.id.weatherConditionTextView)
             val cityTextView = view?.findViewById<TextView>(R.id.cityText)
             val weatherDesc = view?.findViewById<TextView>(R.id.DescriptionTextView)
-//            val weatherIconImageView = view?.findViewById<ImageView>(R.id.weatherIconImageView)
+//            val weatherIconImageView = view?.findViewById<ImageView>(R.id.imageView2)
 
             // Convert temperature based on the selected unit
             val convertedTemperature = if (selectedUnit == "Celsius") {
@@ -193,14 +203,18 @@ class WeatherFragment : Fragment() {
             }
 
             val unitSymbol = if (selectedUnit == "Celsius") "C" else "F"
-            val temperatureString = "Today's temperature is $convertedTemperature°$unitSymbol"
+            val temperatureString = "$convertedTemperature°$unitSymbol"
+
+//            Glide.with(requireContext())
+//                .load(weatherIcon)
+//                .into(weatherIconImageView!!)
 
             // Set the value in the TextView
             temperatureTextView?.text = temperatureString
             // Display the weather condition
             weatherConditionTextView?.text = "Weather: $weatherCondition"
 
-            weatherDesc?.text = weatherDescription
+            weatherDesc?.text = "Weather Description: $weatherDescription"
 
             if (cityName.isNotEmpty()) {
                 // Set the city name in the TextView
@@ -221,12 +235,6 @@ class WeatherFragment : Fragment() {
                 .load(gifResourceId)
                 .apply(RequestOptions().format(DecodeFormat.PREFER_ARGB_8888))
                 .into(imageView)
-            // implementation 'com.github.bumptech.glide:glide:4.12.0'
-            // annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
-            // Then, use Glide to load the weather icon
-//            Glide.with(requireContext())
-//                .load("https://openweathermap.org/img/wn/$weatherIcon.png")
-//                .into(weatherIconImageView!!)
 
             // Continue extracting and updating other relevant information
             // ...
