@@ -25,7 +25,6 @@ class ProfileRVAdapter(private var dataList: List<ForumDataAPIItem>) : RecyclerV
     // for binding our data to views: gets called whenever the recycler view needs to display data.
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = dataList[position]
-        Log.d("tag", "EHLO");
         holder.tvFORUMTITLE.text = "${item.forumTitle} Community Forum" //+ item.forumTitle.toString() // located in DataAPIItem
 
         // Clear the existing image views in the container
@@ -35,7 +34,6 @@ class ProfileRVAdapter(private var dataList: List<ForumDataAPIItem>) : RecyclerV
         // You may need to customize this part based on your layout structure
         for (imageUrl in item.forumImageUrls) {
             val imageView = ImageView(holder.itemView.context)
-            Log.d("tag", "WE ARE INNNNN");
             Picasso.get().load(imageUrl).into(imageView)//imageView.setImageResource(imageResId)
             holder.imageContainer.addView(imageView)
 

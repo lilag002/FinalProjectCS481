@@ -24,7 +24,7 @@ import com.squareup.picasso.Picasso
 
 class RVAdapterHome(private val postList: List<Post>): RecyclerView.Adapter<RVAdapterHome.ViewHolder>() {
         private val postDao = FirestorePostDao(FirebaseFirestore.getInstance())
-    private val userDao = FirestoreUserDao(FirebaseFirestore.getInstance())
+        private val userDao = FirestoreUserDao(FirebaseFirestore.getInstance())
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.recycler_view_home_row,parent,false)
