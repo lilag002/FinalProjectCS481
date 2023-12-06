@@ -121,7 +121,7 @@ class FirestoreUserDao(private val db: FirebaseFirestore) : UserDao {
                     likedPostsCollection.document(document.id).delete().await()
                 }
             } else {
-                Log.e("Remove Liked Post","Post Not Found")
+                Log.e("ERROR UserDAO","Post with cid $postId not found")
             }
 
         } catch (e: Exception) {
@@ -131,11 +131,56 @@ class FirestoreUserDao(private val db: FirebaseFirestore) : UserDao {
     }
 
     override suspend fun addDislikedPost(postId: String) {
-        TODO("Not yet implemented")
+        try {
+            // Get the current user's ID (You might have a method to fetch this)
+            val userId = FirebaseAuth.getInstance().uid.toString()
+
+            // Create a reference to the dislikedPosts collection in the user's document
+            val likedPostsCollection = userCollection.document(userId)
+                .collection("dislikedPosts")
+
+            // Create a reference to the post using postId
+            val postReference = postsCollection.document(postId)
+
+            // Create a document in the dislikedPosts collection with a field 'post' containing the postReference
+            likedPostsCollection.add(mapOf("post" to postReference))
+                .await()
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Log.e("ERROR UserDAO",e.message.toString())
+        }
     }
 
     override suspend fun removeDislikedPost(postId: String) {
-        TODO("Not yet implemented")
+        try {
+            // Get the current user's ID
+            val userId = FirebaseAuth.getInstance().uid.toString()
+
+            // Reference to the dislikedPosts collection in the user's document
+            val likedPostsCollection = userCollection.document(userId)
+                .collection("dislikedPosts")
+
+            // Query to find the specific document containing the 'post' field with postId reference
+            val query = likedPostsCollection.whereEqualTo("post", postsCollection.document(postId))
+
+            // Get the query snapshot to check if the document exists
+            val snapshot = query.get().await()
+
+            if (!snapshot.isEmpty) {
+                // Loop through the documents found by the query (should be just one)
+                for (document in snapshot.documents) {
+                    // Delete the document(s) found in the query
+                    likedPostsCollection.document(document.id).delete().await()
+                }
+            } else {
+                Log.e("ERROR UserDAO","Post with cid $postId not found")
+            }
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Log.e("ERROR UserDAO",e.message.toString())
+        }
     }
 
 

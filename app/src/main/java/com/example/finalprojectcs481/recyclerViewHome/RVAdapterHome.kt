@@ -24,6 +24,7 @@ import com.squareup.picasso.Picasso
 
 class RVAdapterHome(private val postList: List<Post>): RecyclerView.Adapter<RVAdapterHome.ViewHolder>() {
         private val postDao = FirestorePostDao(FirebaseFirestore.getInstance())
+    private val userDao = FirestoreUserDao(FirebaseFirestore.getInstance())
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.recycler_view_home_row,parent,false)
@@ -54,6 +55,7 @@ class RVAdapterHome(private val postList: List<Post>): RecyclerView.Adapter<RVAd
                             holder.tvDISLIKES.text =
                                 (holder.tvDISLIKES.text.toString().toInt() - 1).toString()
                             postDao.decDislikePost(item.id) // database update
+                            userDao.removeDislikedPost(item.id) // database update
                             item.dislikes--
                         }
                         holder.btnLike.setImageResource(R.drawable.baseline_thumb_up_24_click)
@@ -61,11 +63,13 @@ class RVAdapterHome(private val postList: List<Post>): RecyclerView.Adapter<RVAd
                         holder.tvLIKES.text =
                             (holder.tvLIKES.text.toString().toInt() + 1).toString()
                         postDao.likePost(item.id)   // database update
+                        userDao.addLikedPost(item.id)   // database update
                         item.likes++
                     }
                     else{
                         holder.btnLike.setImageResource(R.drawable.baseline_thumb_up_24)
-                        postDao.decLikePost(item.id)
+                        postDao.decLikePost(item.id)    //database update
+                        userDao.removeLikedPost(item.id)    // database update
                         item.likes--
                         holder.tvLIKES.text =
                             (holder.tvLIKES.text.toString().toInt() - 1).toString()
@@ -82,6 +86,7 @@ class RVAdapterHome(private val postList: List<Post>): RecyclerView.Adapter<RVAd
                             holder.tvLIKES.text =
                                 (holder.tvLIKES.text.toString().toInt() - 1).toString()
                             postDao.decLikePost(item.id)
+                            userDao.removeLikedPost(item.id)
                             item.likes--
                         }
                         holder.btnDislike.setImageResource(R.drawable.baseline_thumb_down_alt_24_click)
@@ -89,11 +94,13 @@ class RVAdapterHome(private val postList: List<Post>): RecyclerView.Adapter<RVAd
                         holder.tvDISLIKES.text =
                             (holder.tvDISLIKES.text.toString().toInt() + 1).toString()
                         postDao.dislikePost(item.id)
+                        userDao.addDislikedPost(item.id)
                         item.dislikes++
                     }
                     else{
                         holder.btnDislike.setImageResource(R.drawable.baseline_thumb_down_alt_24)
                         postDao.decDislikePost(item.id)
+                        userDao.removeDislikedPost(item.id)
                         item.dislikes--
                         holder.tvDISLIKES.text =
                             (holder.tvDISLIKES.text.toString().toInt() - 1).toString()
