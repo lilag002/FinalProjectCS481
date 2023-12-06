@@ -17,6 +17,10 @@ interface PostDao {
     suspend fun addPost(post: Post)
     suspend fun updatePost(postId: String, post: Post)
     suspend fun deletePost(postId: String)
+    suspend fun dislikePost(postId: String)
+    suspend fun likePost(postId: String)
+    suspend fun decLikePost(postId: String)
+    suspend fun decDislikePost(postId: String)
 }
 
 class FirestorePostDao(private val db: FirebaseFirestore) : PostDao {
@@ -45,17 +49,88 @@ class FirestorePostDao(private val db: FirebaseFirestore) : PostDao {
                     else -> post // Return the original post object if neither liked nor disliked
                 }
             }
-
-//        for (i in postList) {
-//            Log.d("Post", i.disliked.toString())
-//        }
-//        for (i in likedSet) {
-//            Log.d("likedSet", i.toString())
-//        }
-//        for (i in dislikedSet) {
-//            Log.d("dislikedSet", i.toString())
 //        }
         return postList
+    }
+
+    override suspend fun dislikePost(postId: String) {
+        try {
+            val postRef = postsCollection.document(postId)
+            val postSnapshot = postRef.get().await()
+
+            // Get current value of dislikes
+            var currentDislikes = postSnapshot.getLong("dislikes") ?: 0
+
+            // Increment dislikes by 1
+            currentDislikes++
+
+            // Update dislikes field in Firestore
+            postRef.update("dislikes", currentDislikes).await()
+        } catch (e: Exception) {
+            // Handle exceptions
+            e.printStackTrace()
+            Log.e("Error PostDAO",e.message.toString())
+        }
+    }
+
+    override suspend fun likePost(postId: String) {
+        try {
+            val postRef = postsCollection.document(postId)
+            val postSnapshot = postRef.get().await()
+
+            // Get current value of likes
+            var currentLikes = postSnapshot.getLong("likes") ?: 0
+
+            // Increment likes by 1
+            currentLikes++
+
+            // Update likes field in Firestore
+            postRef.update("likes", currentLikes).await()
+        } catch (e: Exception) {
+            // Handle exceptions
+            e.printStackTrace()
+            Log.e("Error PostDAO",e.message.toString())
+        }
+    }
+
+    override suspend fun decDislikePost(postId: String) {
+        try {
+            val postRef = postsCollection.document(postId)
+            val postSnapshot = postRef.get().await()
+
+            // Get current value of dislikes
+            var currentDislikes = postSnapshot.getLong("dislikes") ?: 0
+
+            // Decrement dislikes by 1
+            currentDislikes--
+
+            // Update dislikes field in Firestore
+            postRef.update("dislikes", currentDislikes).await()
+        } catch (e: Exception) {
+            // Handle exceptions
+            e.printStackTrace()
+            Log.e("Error PostDAO",e.message.toString())
+        }
+    }
+
+    override suspend fun decLikePost(postId: String) {
+        try {
+            val postRef = postsCollection.document(postId)
+            val postSnapshot = postRef.get().await()
+
+            // Get current value of likes
+            var currentLikes = postSnapshot.getLong("likes") ?: 0
+
+            // Decrement dislikes by 1
+            currentLikes--
+
+            // Update likes field in Firestore
+            postRef.update("likes", currentLikes).await()
+        } catch (e: Exception) {
+            // Handle exceptions
+            e.printStackTrace()
+            Log.e("Error PostDAO",e.message.toString())
+        }
     }
 
     override suspend fun addPost(post: Post) {

@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.finalprojectcs481.postModelData.PostData
 import com.example.finalprojectcs481.recyclerViewHome.RVAdapterHome
 import com.google.firebase.Timestamp
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.CollectionReference
@@ -13,17 +14,17 @@ import com.google.firebase.firestore.toObjects
 import kotlinx.coroutines.tasks.await
 
 interface UserDao {
-//    suspend fun getPostById(postId: String): Post?
-//    suspend fun getAllPosts(): List<Post>
-//    suspend fun addPost(post: Post)
-//    suspend fun updatePost(postId: String, post: Post)
-//    suspend fun deletePost(postId: String)
     suspend fun getLikedPostIds(userId: String): Set<String>
     suspend fun getDislikedPostIds(userId: String): Set<String>
+    suspend fun addLikedPost(postId: String)
+    suspend fun removeLikedPost(postId: String)
+    suspend fun addDislikedPost(postId: String)
+    suspend fun removeDislikedPost(postId: String)
 }
 
 class FirestoreUserDao(private val db: FirebaseFirestore) : UserDao {
     private val userCollection: CollectionReference = db.collection("users")
+    private val postsCollection: CollectionReference = db.collection("Posts")
 
     override suspend fun getLikedPostIds(userId: String): Set<String> {
         try {
@@ -77,24 +78,66 @@ class FirestoreUserDao(private val db: FirebaseFirestore) : UserDao {
         }
     }
 
-//    override suspend fun getPostById(postId: String): Post? {
-//        return postsCollection.document(postId).get().await().toObject(Post::class.java)
-//    }
-//
-//    override suspend fun getAllPosts(): List<Post> {
-//        return postsCollection.orderBy("date",Query.Direction.DESCENDING).get().await().toObjects(Post::class.java)
-//    }
-//
-//    override suspend fun addPost(post: Post) {
-//        postsCollection.add(post).await()
-//    }
-//
-//    override suspend fun updatePost(postId: String, post: Post) {
-//        postsCollection.document(postId).set(post).await()
-//    }
-//
-//    override suspend fun deletePost(postId: String) {
-//        postsCollection.document(postId).delete().await()
-//    }
+    override suspend fun addLikedPost(postId: String) {
+        try {
+            // Get the current user's ID (You might have a method to fetch this)
+            val userId = FirebaseAuth.getInstance().uid.toString()
+
+            // Create a reference to the likedPosts collection in the user's document
+            val likedPostsCollection = userCollection.document(userId)
+                .collection("likedPosts")
+
+            // Create a reference to the post using postId
+            val postReference = postsCollection.document(postId)
+
+            // Create a document in the likedPosts collection with a field 'post' containing the postReference
+            likedPostsCollection.add(mapOf("post" to postReference))
+                .await()
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    override suspend fun removeLikedPost(postId: String) {
+        try {
+            // Get the current user's ID
+            val userId = FirebaseAuth.getInstance().uid.toString()
+
+            // Reference to the likedPosts collection in the user's document
+            val likedPostsCollection = userCollection.document(userId)
+                .collection("likedPosts")
+
+            // Query to find the specific document containing the 'post' field with postId reference
+            val query = likedPostsCollection.whereEqualTo("post", postsCollection.document(postId))
+
+            // Get the query snapshot to check if the document exists
+            val snapshot = query.get().await()
+
+            if (!snapshot.isEmpty) {
+                // Loop through the documents found by the query (should be just one)
+                for (document in snapshot.documents) {
+                    // Delete the document(s) found in the query
+                    likedPostsCollection.document(document.id).delete().await()
+                }
+            } else {
+                Log.e("Remove Liked Post","Post Not Found")
+            }
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Log.e("ERROR UserDAO",e.message.toString())
+        }
+    }
+
+    override suspend fun addDislikedPost(postId: String) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun removeDislikedPost(postId: String) {
+        TODO("Not yet implemented")
+    }
+
+
 
 }
