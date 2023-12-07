@@ -44,6 +44,7 @@ class SearchFragment : Fragment() {
 
             recyclerView = view.findViewById(R.id.searchRecyclerView)
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            forums.clear()
 
             forums.addAll(forumDao.getAllForums())
 
@@ -57,13 +58,16 @@ class SearchFragment : Fragment() {
                 if(query.isNotEmpty()){
                     forums.clear()
                     forums.addAll(forumDao.searchForums(query))
-                    for(i in forums){
-                        Log.d("Forum",i.forumTitle)
-                    }
                     adapter.setData(forums)
+                    adapter.notifyDataSetChanged()
                 }
                 else{
-                    Log.e("Forum Search","No Forum found")
+                    lifecycleScope.launch {
+                        forums.clear()
+                        forums.addAll(forumDao.getAllForums())
+                        adapter.setData(forums)
+                        adapter.notifyDataSetChanged()
+                    }
                 }
             }
         }

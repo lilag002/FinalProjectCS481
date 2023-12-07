@@ -59,13 +59,20 @@ class FirestoreForumDao(private val db: FirebaseFirestore) : ForumDao {
                     .get()
                     .await()
 
-                for (document in querySnapshot.documents) {
-                    val forum = document.toObject(ForumDataAPIItem::class.java)
-                    forum?.let { forumsList.add(it) }
+                for (document in querySnapshot) {
+                    val forumTitle = document.getString("Title") ?: ""
+                    val forumImageUrlsString = document.getString("image") ?: ""
+
+                    // Split the comma-separated string into a list of integers
+                    val forumImageUrls = forumImageUrlsString.split(",")
+
+                    Log.d("ProfileFragment", "ForumTitle: $forumTitle, image: $forumImageUrls")
+
+                    val forumDataItem = ForumDataAPIItem(forumTitle, forumImageUrls)
+                    forumsList.add(forumDataItem)
                 }
             } catch (e: Exception) {
                 Log.e("FirestoreDao", "Error searching forums", e)
-                // Handle the exception appropriately
             }
 
             return forumsList

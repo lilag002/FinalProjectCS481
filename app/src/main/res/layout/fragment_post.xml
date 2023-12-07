@@ -15,7 +15,7 @@
             android:id="@+id/textInputTitle"
             android:layout_width="245dp"
             android:layout_height="45dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/edit_round"
             android:ems="10"
             android:fontFamily="@font/arimoitalic"
@@ -31,7 +31,7 @@
             android:id="@+id/imageViewUpload"
             android:layout_width="279dp"
             android:layout_height="361dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="52dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -54,10 +54,22 @@
             android:id="@+id/buttonUpload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="80dp"
             android:backgroundTint="#598392"
             android:text="Upload"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputTitle" />
+
+        <Spinner
+            android:id="@+id/spinnerDropdown"
+            android:layout_width="196dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="20dp"
+            android:background="#D8D8D8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputTitle" />
 
