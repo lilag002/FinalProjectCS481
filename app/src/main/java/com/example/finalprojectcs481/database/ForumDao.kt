@@ -18,7 +18,7 @@ import kotlinx.coroutines.tasks.await
 
 interface ForumDao {
     suspend fun getAllForums():List<ForumDataAPIItem>
-    suspend fun searchForums():List<ForumDataAPIItem>
+    suspend fun searchForums(query :String):List<ForumDataAPIItem>
 }
 
 class FirestoreForumDao(private val db: FirebaseFirestore) : ForumDao {
@@ -49,7 +49,25 @@ class FirestoreForumDao(private val db: FirebaseFirestore) : ForumDao {
         }
     }
 
-    override suspend fun searchForums(): List<ForumDataAPIItem> {
-        TODO("Not yet implemented")
+    override suspend fun searchForums(query: String): List<ForumDataAPIItem> {
+            val forumsList = mutableListOf<ForumDataAPIItem>()
+
+            try {
+                // Query Firestore for forums with a title that matches the search query
+                val querySnapshot = formsCollection
+                    .whereEqualTo("Title", query) // or use 'whereArrayContains' if it's an array of titles
+                    .get()
+                    .await()
+
+                for (document in querySnapshot.documents) {
+                    val forum = document.toObject(ForumDataAPIItem::class.java)
+                    forum?.let { forumsList.add(it) }
+                }
+            } catch (e: Exception) {
+                Log.e("FirestoreDao", "Error searching forums", e)
+                // Handle the exception appropriately
+            }
+
+            return forumsList
     }
 }

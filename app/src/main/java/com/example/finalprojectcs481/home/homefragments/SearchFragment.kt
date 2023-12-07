@@ -3,9 +3,13 @@ package com.example.finalprojectcs481.home.homefragments
 import RecyclerViewforProfilePage.ForumDataAPIItem
 import RecyclerViewforProfilePage.ProfileRVAdapter
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.finalprojectcs481.R
 import androidx.lifecycle.lifecycleScope
@@ -46,6 +50,24 @@ class SearchFragment : Fragment() {
             adapter = ProfileRVAdapter(forums)
             recyclerView.adapter = adapter
         }
+
+        view.findViewById<ImageButton>(R.id.imageButtonSearch).setOnClickListener {
+            lifecycleScope.launch {
+                val query = view.findViewById<TextView>(R.id.textInputSearch).text.toString()
+                if(query.isNotEmpty()){
+                    forums.clear()
+                    forums.addAll(forumDao.searchForums(query))
+                    for(i in forums){
+                        Log.d("Forum",i.forumTitle)
+                    }
+                    adapter.setData(forums)
+                }
+                else{
+                    Log.e("Forum Search","No Forum found")
+                }
+            }
+        }
+
     }
 
     override fun onCreateView(
