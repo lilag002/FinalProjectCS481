@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- res/layout/fragment_weather.xml -->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:ignore="ExtraText">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/weather_morning" />
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView2"-->
+<!--        android:layout_width="50dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_marginBottom="115dp"-->
+<!--        android:scaleType="centerCrop"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/DescriptionTextView"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/DescriptionTextView"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/unitSpinner" />-->
 
     <TextView
         android:id="@+id/temperatureTextView"
@@ -17,9 +26,114 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:textColor="@android:color/white"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Add this to your XML layout file (fragment_weather.xml) -->
+    <EditText
+        android:id="@+id/cityTextView"
+        android:layout_width="165dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="19dp"
+        android:hint="Enter City"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/submitBtn"
+        app:layout_constraintEnd_toEndOf="@+id/submitBtn"
+        app:layout_constraintStart_toStartOf="@+id/submitBtn"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--    <ProgressBar-->
+    <!--        android:id="@+id/loadingIndicator"-->
+    <!--        android:layout_width="80dp"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:layout_marginBottom="245dp"-->
+    <!--        android:visibility="invisible"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/temperatureTextView" />-->
+
+    <Spinner
+        android:id="@+id/unitSpinner"
+        android:layout_width="165dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="494dp"
+        android:entries="@array/unit_options"
+        app:layout_constraintStart_toEndOf="@+id/cityTextView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/submitBtn"
+        android:layout_width="165dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="582dp"
+        android:text="Submit"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cityTextView" />
+
+    <TextView
+        android:id="@+id/weatherConditionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:textColor="@android:color/white"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/temperatureTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.467"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cityText"
+        app:layout_constraintVertical_bias="0.442" />
+
+    <TextView
+        android:id="@+id/cityText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="212dp"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        app:flow_verticalAlign="center"
+        app:layout_constraintEnd_toEndOf="@+id/weatherConditionTextView"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/DescriptionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        android:text=""
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/temperatureTextView"
+        app:layout_constraintStart_toStartOf="@+id/temperatureTextView"
+        app:layout_constraintTop_toBottomOf="@+id/temperatureTextView" />
 
 
     <!-- Add other TextViews for additional weather information -->
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

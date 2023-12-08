@@ -1,5 +1,14 @@
 package com.example.finalprojectcs481.home.homefragments
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import androidx.core.content.ContextCompat
+import android.os.Build
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -41,6 +50,9 @@ class PostFragment : Fragment() {
     private lateinit var forumSelection: String
     private lateinit var forumDocReference: DocumentReference
 
+
+
+
     override fun onViewCreated(view: android.view.View, savedInstanceState: android.os.Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         image = view.findViewById<ImageView>(R.id.imageViewUpload)
@@ -50,6 +62,7 @@ class PostFragment : Fragment() {
 
         val storageRef = FirebaseStorage.getInstance()
         val firestoreRef = FirebaseFirestore.getInstance()
+
 
         lifecycleScope.launch{
             titles.addAll(forumDao.getAllForumTitles())
@@ -146,9 +159,12 @@ class PostFragment : Fragment() {
                                             .addOnSuccessListener {
                                                 Log.d("dbfirebase success","saved ${post}")
                                                 Toast.makeText(context, "successfully posted!", Toast.LENGTH_SHORT).show();
+                                                sendNotification(title.text.toString(),uri)
                                                 image.setImageResource(R.drawable.white)
                                                 imageSet = false
                                                 title.text.clear()
+
+
                                             }
                                             .addOnFailureListener{
                                                 Log.d("dbfirebase failed","${post}")
@@ -165,6 +181,49 @@ class PostFragment : Fragment() {
             }
         }
     }
+    private fun createNotificationChannel(title: String) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Post Channel"
+            val descriptionText = "Channel for post notifications"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel("C10", name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager =
+                requireActivity().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+
+        }
+    }
+    private fun sendNotification(title: String, imageUri: Uri){
+            val con = "Congratulations On Your Post: "
+
+            val imageBitmap = uriToBitmap(imageUri)
+
+            val builder = NotificationCompat.Builder(requireContext(), "C10")
+                .setSmallIcon(R.drawable.navy)
+                .setContentTitle(con+title)
+                .setLargeIcon(imageBitmap)
+                .setStyle(NotificationCompat.BigPictureStyle()
+                    .bigPicture(imageBitmap)
+                    .bigLargeIcon(imageBitmap))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+           with(NotificationManagerCompat.from(requireContext())){
+               notify(10,builder.build())
+        }
+    }
+
+    private fun uriToBitmap(uri: Uri): Bitmap? {
+        return try {
+            val inputStream = requireContext().contentResolver.openInputStream(uri)
+            BitmapFactory.decodeStream(inputStream)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -178,4 +237,16 @@ class PostFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_post, container, false)
     }
 
+
+
+
+
 }
+
+
+
+
+
+
+
+
