@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="275dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -11,9 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
+        app:cardCornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:cardCornerRadius="16dp"
         app:layout_constraintTop_toTopOf="parent">
 
 
@@ -27,8 +27,8 @@
             <LinearLayout
                 android:id="@+id/imageContainer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"/>
+                android:layout_height="match_parent"
+                android:orientation="horizontal" />
 
             <!-- Your views and constraints go here -->
             <!-- TextView within the nested ConstraintLayout -->
@@ -52,12 +52,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
     </androidx.cardview.widget.CardView>
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

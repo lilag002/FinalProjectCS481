@@ -15,6 +15,7 @@ import com.example.finalprojectcs481.postModelData.PostData
 import com.example.finalprojectcs481.recyclerViewHome.RVAdapterHome
 import com.google.firebase.firestore.FirebaseFirestore
 import androidx.lifecycle.lifecycleScope
+import com.example.finalprojectcs481.database.FirestoreUserDao
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.Query
 import com.google.firebase.storage.FirebaseStorage
@@ -38,7 +39,20 @@ class HomeFragment : Fragment() {
         lifecycleScope.launch {
             try {
                 val postDao = FirestorePostDao(FirebaseFirestore.getInstance())
+                val userDao = FirestoreUserDao(FirebaseFirestore.getInstance())
                 val myPostList = postDao.getAllPosts()
+
+//                val myLikes = userDao.getLikedPosts(FirebaseAuth.getInstance().uid.toString())
+
+//                for(i in myLikes){
+//                    Log.d("likes",i.id)
+//                    if(i != null){
+//                        val p = postDao.getPostById(i.id)
+//                        if (p != null) {
+//                            Log.d("likedPost",p.title)
+//                        }
+//                    }
+//                }
 
                 posts.clear()
                 posts.addAll(myPostList)

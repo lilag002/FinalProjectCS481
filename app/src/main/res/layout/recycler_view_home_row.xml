@@ -65,7 +65,7 @@
                 app:srcCompat="@drawable/baseline_thumb_up_24" />
 
             <ImageButton
-                android:id="@+id/imageButton2"
+                android:id="@+id/dislikeButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="7dp"
@@ -92,7 +92,7 @@
                 android:text="0"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageButton2" />
+                app:layout_constraintStart_toEndOf="@+id/dislikeButton" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

@@ -48,7 +48,6 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("tag", "RIGHT HERE ASSHOLE");
         // Setting username
         db.collection("users").document(FirebaseAuth.getInstance().uid.toString()).get()
             .addOnCompleteListener {
@@ -60,9 +59,11 @@ class ProfileFragment : Fragment() {
         recyclerView = view.findViewById(R.id.ProfileForumRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        // Initialize adapter here
-        adapter = ProfileRVAdapter(emptyList())
+
+
+        adapter = ProfileRVAdapter(emptyList(), requireActivity().supportFragmentManager)
         recyclerView.adapter = adapter
+
 
         fetchDataFromFirestore()
 
