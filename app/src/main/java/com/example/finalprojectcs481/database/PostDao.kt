@@ -21,14 +21,52 @@ interface PostDao {
     suspend fun likePost(postId: String)
     suspend fun decLikePost(postId: String)
     suspend fun decDislikePost(postId: String)
+    suspend fun getAllPostsByForum(forum: String):List<Post>
 }
 
 class FirestorePostDao(private val db: FirebaseFirestore) : PostDao {
     private val postsCollection: CollectionReference = db.collection("Posts")
     private val userDao = FirestoreUserDao(FirebaseFirestore.getInstance())
+    private val formsCollection: CollectionReference = db.collection("Forums")
 
     override suspend fun getPostById(postId: String): Post? {
         return postsCollection.document(postId).get().await().toObject(Post::class.java)
+    }
+
+    override suspend fun getAllPostsByForum(forum: String): List<Post> {
+        val likedSet = userDao.getLikedPostIds(FirebaseAuth.getInstance().uid.toString())
+        val dislikedSet = userDao.getDislikedPostIds(FirebaseAuth.getInstance().uid.toString())
+
+        val forumReference = formsCollection
+            .whereEqualTo("Title", forum)
+            .get()
+            .await()
+            .documents
+            .firstOrNull()
+            ?.reference
+
+        if (forumReference != null) {
+            Log.d("ForumReference", forumReference.id) // Log the ID of the forum reference
+            val postList = postsCollection
+                .whereEqualTo("forum", forumReference)
+                .get()
+                .await()
+                .documents
+                .mapNotNull { document ->
+                    val postId = document.id
+                    var post = document.toObject(Post::class.java)
+                    post?.copy(id = postId)?.apply {
+                        // Modify the post based on liked and disliked sets
+                        liked = likedSet.contains(postId)
+                        disliked = dislikedSet.contains(postId)
+                    }
+                }
+            Log.d("PostListSize", postList.size.toString()) // Log the size of the post list
+            return postList
+        } else {
+            Log.d("ForumReference", "Forum reference is null")
+            return emptyList()
+        }
     }
 
     override suspend fun getAllPosts(): List<Post> {

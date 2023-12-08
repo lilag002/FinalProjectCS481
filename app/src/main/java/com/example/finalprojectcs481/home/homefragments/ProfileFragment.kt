@@ -59,9 +59,11 @@ class ProfileFragment : Fragment() {
         recyclerView = view.findViewById(R.id.ProfileForumRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        // Initialize adapter here
-        adapter = ProfileRVAdapter(emptyList())
+
+
+        adapter = ProfileRVAdapter(emptyList(), requireActivity().supportFragmentManager)
         recyclerView.adapter = adapter
+
 
         fetchDataFromFirestore()
 

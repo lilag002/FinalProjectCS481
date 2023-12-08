@@ -9,12 +9,17 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalprojectcs481.R
+import com.example.finalprojectcs481.home.homefragments.ForumPosts
 import com.squareup.picasso.Picasso
 
-class ProfileRVAdapter(private var dataList: List<ForumDataAPIItem>) : RecyclerView.Adapter<ProfileRVAdapter.ViewHolder>() {
+class ProfileRVAdapter(private var dataList: List<ForumDataAPIItem>,
+                       private val fragmentManager: FragmentManager
+) : RecyclerView.Adapter<ProfileRVAdapter.ViewHolder>() {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
        val view = LayoutInflater.from(parent.context)
@@ -51,7 +56,17 @@ class ProfileRVAdapter(private var dataList: List<ForumDataAPIItem>) : RecyclerV
 
         init {
             itemView.setOnClickListener{
-                Toast.makeText(itemView.context, "You have clicked ${dataList[adapterPosition].forumTitle}", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(itemView.context, "You have clicked ${dataList[adapterPosition].forumTitle}", Toast.LENGTH_SHORT).show()
+                // move to fragment here
+                val newFragment = ForumPosts().apply {
+                    arguments = Bundle().apply{
+                        putString("Forum",dataList[adapterPosition].forumTitle)
+                    }
+                }
+                val transaction = fragmentManager.beginTransaction()
+                transaction.replace(R.id.fContainerView, newFragment) // Replace 'R.id.container' with the ID of your fragment container in the activity
+                transaction.addToBackStack(null) // Optional: Adds this transaction to the back stack
+                transaction.commit()
             }
         }
     }

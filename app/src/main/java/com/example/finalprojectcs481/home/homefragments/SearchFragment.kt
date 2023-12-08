@@ -48,7 +48,7 @@ class SearchFragment : Fragment() {
 
             forums.addAll(forumDao.getAllForums())
 
-            adapter = ProfileRVAdapter(forums)
+            adapter = ProfileRVAdapter(forums, requireActivity().supportFragmentManager)
             recyclerView.adapter = adapter
         }
 

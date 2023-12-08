@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#124559"
+    tools:context=".home.homefragments.ForumPosts">
+
+    <TextView
+        android:id="@+id/ForumPostsTitle"
+        android:layout_width="381dp"
+        android:layout_height="69dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/arimobold"
+        android:gravity="center"
+        android:text="yoooooo"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="405dp"
+        android:layout_height="596dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/forumPostRV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#124559" />
+    </FrameLayout>
+
+    <ImageButton
+        android:id="@+id/buttonBackSearch"
+        android:layout_width="71dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="341dp"
+        android:backgroundTint="#00B56262"
+        android:src="@drawable/baseline_arrow_back_ios_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.055"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
