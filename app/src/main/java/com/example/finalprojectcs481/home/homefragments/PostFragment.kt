@@ -15,19 +15,25 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Spinner
+import androidx.lifecycle.lifecycleScope
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.example.finalprojectcs481.R
+import com.example.finalprojectcs481.database.FirestoreForumDao
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import kotlinx.coroutines.launch
 
 /**
  * A simple [Fragment] subclass.
@@ -38,7 +44,11 @@ class PostFragment : Fragment() {
     private lateinit var image: ImageView
     private lateinit var uri: Uri
     private lateinit var title: EditText
+    private var titles: ArrayList<String> = arrayListOf()
+    private val forumDao = FirestoreForumDao(FirebaseFirestore.getInstance())
     private var imageSet = false
+    private lateinit var forumSelection: String
+    private lateinit var forumDocReference: DocumentReference
 
 
 
@@ -47,11 +57,62 @@ class PostFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         image = view.findViewById<ImageView>(R.id.imageViewUpload)
         title = view.findViewById<EditText>(R.id.textInputTitle)
+        val spinner: Spinner = view.findViewById(R.id.spinnerDropdown)
 
 
         val storageRef = FirebaseStorage.getInstance()
         val firestoreRef = FirebaseFirestore.getInstance()
-        
+
+
+        lifecycleScope.launch{
+            titles.addAll(forumDao.getAllForumTitles())
+            titles.add(0,"No Forum")
+            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, titles)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adapter
+        }
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                // Handle item selection here
+                forumSelection = titles[position]
+                // Do something with the selected item
+                if(forumSelection != "No Forum"){
+                    val firestoreRef = FirebaseFirestore.getInstance()
+
+                    // Query Firestore to find the document by title
+                    val forumsCollection = firestoreRef.collection("Forums")
+                    forumsCollection.whereEqualTo("Title",forumSelection)
+                        .get()
+                        .addOnSuccessListener { documents ->
+                            if (!documents.isEmpty) {
+                                // Assuming you want to set the "forum" field in a specific document
+                                val forumDocument = documents.documents[0] // Assuming only one document matches the title
+
+                                // Set the "forum" field in your Firestore document
+                                 forumDocReference = forumDocument.reference
+                                // Update the Firestore document using post map or however you're updating it
+                            } else {
+                                // Handle case where no document matches the title
+                            }
+                        }
+                        .addOnFailureListener { e ->
+                            // Handle any errors that occur during the query
+                        }
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Handle case where nothing is selected
+            }
+        }
+
+
 
         val galleryImage = registerForActivityResult(
             ActivityResultContracts.GetContent()
@@ -87,7 +148,9 @@ class PostFragment : Fragment() {
                                         post["date"] = Timestamp.now()
                                         post["dislikes"] = 0
                                         post["likes"] = 0
-                                        //post["forum"] = firestoreRef.collection("Forums").document("xJW49CFXDkkpLUs3zVWL")
+                                        if(forumSelection != "No Forum") {
+                                            post["forum"] = forumDocReference
+                                        }
                                         post["image"] = imageUrl
                                         post["title"] = title.text.toString()
                                         post["username"] = username
@@ -96,6 +159,7 @@ class PostFragment : Fragment() {
                                             .addOnSuccessListener {
                                                 Log.d("dbfirebase success","saved ${post}")
                                                 Toast.makeText(context, "successfully posted!", Toast.LENGTH_SHORT).show();
+                                                createNotificationChannel("string")
                                                 sendNotification(title.text.toString(),uri)
                                                 image.setImageResource(R.drawable.white)
                                                 imageSet = false
