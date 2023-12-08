@@ -19,6 +19,7 @@ import kotlinx.coroutines.tasks.await
 interface ForumDao {
     suspend fun getAllForums():List<ForumDataAPIItem>
     suspend fun searchForums(query :String):List<ForumDataAPIItem>
+    suspend fun getAllForumTitles():List<String>
 }
 
 class FirestoreForumDao(private val db: FirebaseFirestore) : ForumDao {
@@ -41,6 +42,23 @@ class FirestoreForumDao(private val db: FirebaseFirestore) : ForumDao {
 
                 val forumDataItem = ForumDataAPIItem(forumTitle, forumImageUrls)
                 dataList.add(forumDataItem)
+            }
+            return dataList
+        }catch (e: Exception){
+            Log.e("ERROR ForumDAO",e.message.toString())
+            return emptyList()
+        }
+    }
+
+    override suspend fun getAllForumTitles(): List<String> {
+        try {
+            val snapshot = formsCollection.get().await()
+
+            val dataList = mutableListOf<String>()
+
+            for (document in snapshot) {
+                val forumTitle = document.getString("Title") ?: ""
+                dataList.add(forumTitle)
             }
             return dataList
         }catch (e: Exception){
