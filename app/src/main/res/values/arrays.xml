@@ -1,0 +1,6 @@
+<resources>
+    <string-array name="unit_options">
+        <item>Celsius</item>
+        <item>Fahrenheit</item>
+    </string-array>
+</resources>
