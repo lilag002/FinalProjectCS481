@@ -39,20 +39,7 @@ class HomeFragment : Fragment() {
         lifecycleScope.launch {
             try {
                 val postDao = FirestorePostDao(FirebaseFirestore.getInstance())
-                val userDao = FirestoreUserDao(FirebaseFirestore.getInstance())
                 val myPostList = postDao.getAllPosts()
-
-//                val myLikes = userDao.getLikedPosts(FirebaseAuth.getInstance().uid.toString())
-
-//                for(i in myLikes){
-//                    Log.d("likes",i.id)
-//                    if(i != null){
-//                        val p = postDao.getPostById(i.id)
-//                        if (p != null) {
-//                            Log.d("likedPost",p.title)
-//                        }
-//                    }
-//                }
 
                 posts.clear()
                 posts.addAll(myPostList)

@@ -159,6 +159,7 @@ class PostFragment : Fragment() {
                                             .addOnSuccessListener {
                                                 Log.d("dbfirebase success","saved ${post}")
                                                 Toast.makeText(context, "successfully posted!", Toast.LENGTH_SHORT).show();
+                                                createNotificationChannel("string")
                                                 sendNotification(title.text.toString(),uri)
                                                 image.setImageResource(R.drawable.white)
                                                 imageSet = false
